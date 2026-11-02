@@ -149,7 +149,7 @@ to use in a cron or an agent loop.
 | Symptom | Cause and fix |
 |---|---|
 | `Error: Cannot reach ...: fetch failed` | No network, a proxy, or the endpoint is down. Check `curl -sS https://agent-bounty-feed.dailydollar.workers.dev/health` |
-| `HTTP 406` | A proxy stripped the `Accept` header; run the client directly, not through a rewriting proxy |
+| `HTTP 406` | The request lost its `Accept: application/json, text/event-stream` header (a rewriting proxy or middleware). Run the client directly against the endpoint |
 | `No JSON-RPC response for "..."` | The server answered with an SSE keep-alive only; re-run once — the client already retries |
 | `No open bounty with id ...` | The bounty closed; get current ids from `node client.js list` |
 | Table shows `-` in USD or DEADLINE | The feed has no value for that field (e.g. no deadline) — not an error |
